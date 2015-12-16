@@ -1,4 +1,3 @@
-    
   numero_de_barras :    30
   numero_de_lineas :    41  
   Tensao_base      : 11400
