@@ -1,0 +1,20 @@
+\select@language {brazil}
+\contentsline {section}{\numberline {1}OBJETIVOS}{3}
+\contentsline {section}{\numberline {2}TEORIA}{4}
+\contentsline {subsection}{\numberline {2.1}Descri\c c\~ao do problema}{4}
+\contentsline {subsubsection}{\numberline {2.1.1}Tipos de Barras}{4}
+\contentsline {subsubsection}{\numberline {2.1.2}Modelo da linha}{4}
+\contentsline {subsubsection}{\numberline {2.1.3}Pot\^encias e perdas}{5}
+\contentsline {subsection}{\numberline {2.2}M\'etodo de Newton}{6}
+\contentsline {subsection}{\numberline {2.3}M\'etodo desacoplado 1}{7}
+\contentsline {subsection}{\numberline {2.4}M\'etodo desacoplado 2}{8}
+\contentsline {subsection}{\numberline {2.5}M\'etodo desacoplado r\'apido}{8}
+\contentsline {subsection}{\numberline {2.6}M\'etodo DC}{9}
+\contentsline {section}{\numberline {3}METODOLOGIA EXPERIMENTAL}{10}
+\contentsline {section}{\numberline {4}RESULTADOS}{11}
+\contentsline {subsection}{\numberline {4.1}M\'etodo de Newton}{11}
+\contentsline {subsection}{\numberline {4.2}M\'etodos Desacoplado 1 e 2}{12}
+\contentsline {subsection}{\numberline {4.3}M\'etodo desacoplado r\'apido}{13}
+\contentsline {subsection}{\numberline {4.4}M\'etodo DC}{14}
+\contentsline {section}{\numberline {5}DISCUSS\~OES E CONCLUS\~OES}{15}
+\contentsline {section}{REFER\^ENCIAS}{16}

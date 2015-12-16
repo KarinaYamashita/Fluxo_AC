@@ -1,0 +1,14 @@
+\section{DISCUSSÕES E CONCLUSÕES}
+Ao fim da atividade, foi possível ter uma noção de como estudos de fluxo de potência são realizados. No caso deste trabalho, além de se chegar ao resultado final correto, foi possível comparar os diferentes métodos em termos complexidade e precisão. 
+
+Ao longo do trabalho notou-se que o método de Newton converge com um número menor de iterações, porém estas possuem uma complexidade maior se compararmos com outros métodos. Isso ocorre devido ao método de Newton considerar integralmente a matriz jacobiana, o que faz com que o sistema a ser resolvido seja maior e mais complexo. Por outro lado, os métodos desacoplados levam mais iterações para a convergência, mas sua complexidade é menor devido ao fato do sistema ser dividido em dois independentes. No caso do método desacoplado rápido, a complexidade cai ainda mais, pois as matrizes de acoplamento não são calculadas a cada iteração. Apesar disso, a aplicação do método desacoplado rápido exige que algumas condições sejam satisfeitas. Por fim, o método DC possui a mais baixa complexidade computacional, porém também possui o pior desempenho por tornar as tensões nas barras unitárias. No entanto, o método DC é uma boa alternativa quando o interesse reside na avaliação do fluxo de potência ativa.
+
+Deve-se salientar que aproximações introduzidas nos métodos desacoplados levam à uma redução na velocidade de convergência, podendo até levar a não convergência do problema. Assim, é necessário adotar de forma adequada o método de solução para um problema de fluxo de potência. 
+
+\pagebreak
+
+\addcontentsline{toc}{section}{REFERÊNCIAS}
+\nocite{*}
+\bibliography{2ELE047.Ref}{}
+\bibliographystyle{ieeetr}
+

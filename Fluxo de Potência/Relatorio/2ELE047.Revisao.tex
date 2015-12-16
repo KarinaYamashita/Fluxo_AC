@@ -1,0 +1,400 @@
+\section{TEORIA}
+Esta seção apresentará os conceitos empregados na execução da atividade relatada.
+
+
+\subsection{Descrição do problema}
+A figura abaixo representa o sistema elétrico de potência:
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.7]{imagens/Modelo}
+	\caption{Geração, transmissão e distribuição}
+\end{figure}
+
+O estudo do fluxo de potência na transmissão permite definir as condições de operação dos elementos e fluxo de carga entre linhas. Para isso, a transmissão é representada através de barras, nas quais são ligadas cargas, geradores e outros elementos, e linhas, que ligam duas barras distintas. Neste estudo, admite-se um número n de barras, o que dificulta a análise, exigindo uma modelagem mais genérica.
+
+\subsubsection{Tipos de Barras}
+Neste estudo serão classificadas três tipos de barras:
+\begin{table}[H]
+	\centering
+	\footnotesize
+	\begin{tabular}{c|c|c}\hline
+		\textbf{Tipo} & \textbf{Variáveis conhecidas} & \textbf{Variáveis desconhecidas}    \\\hline
+		$PQ$          & $P,Q$						  & $V,\theta$							\\\hline
+		$PV$          & $P,V$						  & $Q,\theta$								\\\hline
+		$V\theta$     & $V,\theta$					  & $P,Q$								\\\hline
+	\end{tabular}
+	\caption{Tipos de barras}
+\end{table}
+
+\subsubsection{Modelo da linha}
+No geral, as análises do fluxo de potência usam o modelo $\pi$. Tal modelo contempla as resistências, indutâncias e capacitâncias presentes entre duas linhas:
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.8]{imagens/pi}
+	\caption{Modelo $\pi$ da linha}
+\end{figure}
+
+Onde:
+\begin{multicols}{2}
+\begin{itemize}[noitemsep,nolistsep]
+	\item $r_{km}$: resistência série;
+	\item $x_{km}$: reatância indutiva série;
+	\item $b_{k}^{sh}$: susceptância shunt;
+	\item $z_{km}$: impedância série;
+	\item $y_{km}=1/z_{km}$: admitância série;
+	\item $g_{km}=Re(y_{km})$: condutância série;
+	\item $b_{km}=Im(y_{km})$: susceptância série.
+\end{itemize}
+\end{multicols}
+
+
+Neste modelo, a admitância nodal é dada por:
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			Y_{km} & = & -y_{km}\\
+			Y_{mk} & = & -y_{km} \\
+			Y_{mk} & = & j\cdot b_k^{sh} + \displaystyle\sum\limits_{k\in\Omega_k}^{} j\cdot b_k^{sh} + y_{km}
+		\end{array}
+	\end{cases}
+\end{equation}
+
+Além disso, a condutâncias e a susceptâncias nodais ficam:
+ \begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			G_{km} & = & Re(Y_{km})\\
+			B_{km} & = & Im(Y_{km})
+		\end{array}
+	\end{cases}
+\end{equation}
+
+\subsubsection{Potências e perdas}
+As potências, ativas e reativas nodais são dadas respectivamente por:
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			P_{k} & = & V_k \cdot \displaystyle\sum\limits_{k\in\Omega_k}^{} V_m\cdot (G_{km}\cdot cos\theta_{km}+B_{km}\cdot sen\theta_{km})\\
+			Q_{k} & = & V_k \cdot \displaystyle\sum\limits_{k\in\Omega_k}^{} V_m\cdot (G_{km}\cdot cos\theta_{km}-B_{km}\cdot sen\theta_{km})\\
+		\end{array}
+	\end{cases}
+\end{equation}
+
+Já as potências entre duas barras podem ser computadas por:
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			P_{km} & = & g_{km}\cdot V_{k}^2 - V_{k}\cdot V_{m} \cdot ( g_{km}\cdot cos\theta_{km} + b_{km}\cdot sen\theta_{km} )\\
+			Q_{km} & = & -(b_{km}+b_{km}^{sh})\cdot V_{k}^2 - V_{k}\cdot V_{m} \cdot ( g_{km}\cdot sen\theta_{km} - b_{km}\cdot cos\theta_{km} )\\
+			P_{mk} & = & g_{km}\cdot V_{m}^2 - V_{k}\cdot V_{m} \cdot ( g_{km}\cdot cos\theta_{km} - b_{km}\cdot sen\theta_{km} )\\
+			Q_{mk} & = & -(b_{km}+b_{km}^{sh})\cdot V_{m}^2 + V_{k}\cdot V_{m} \cdot ( g_{km}\cdot sen\theta_{km} + b_{km}\cdot cos\theta_{km} )\\
+		\end{array}
+	\end{cases}
+\end{equation}
+
+Por fim as perdas nas linhas são dadas por:
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			Pperdas_{km} & = & P_{km}+P_{mk}\\
+			Qperdas_{km} & = & Q_{km}+Q_{mk}\\
+		\end{array}
+	\end{cases}
+\end{equation}
+
+\subsection{Método de Newton}
+No método de Newton o problema proposto é resolvido da forma completa de forma numérica utilizando o método de Newton, através da matriz jacobiana:
+\begin{equation}
+	\left[
+		\begin{array}{c}
+			\mathbf{\Delta P}\\
+			\mathbf{\Delta Q}		
+		\end{array}
+	\right]^{(i)}
+	=
+	\left[
+		\begin{array}{cc}
+			\mathbf{H} & \mathbf{N}\\
+			\mathbf{M} & \mathbf{L}
+		\end{array}
+	\right]^{(i)}
+	\cdot
+	\left[
+		\begin{array}{c}
+			\mathbf{\Delta \theta}\\
+			\mathbf{\Delta V}		
+		\end{array}
+	\right]^{(i)}
+\end{equation}
+
+O sistema descrito anteriormente é calculada para as barras do tipo $PQ$ e $PV$.
+
+Considera-se para resolução do problema a diferença entre as potências estimadas e as potências calculadas ao longo do processo, a qual também é utilizada como um critério de convergência:
+\begin{equation}
+	\begin{array}{rcl}
+		\mathbf{\Delta P} & = & \mathbf{P_{est}} - \mathbf{P}\\
+		\mathbf{\Delta Q} & = & \mathbf{Q_{est}} - \mathbf{Q}
+	\end{array}
+\end{equation}
+
+No caso das tensões e ângulos, tem-se:
+\begin{equation}
+	\begin{array}{rcl}
+		\mathbf{\Delta P}      & = & \mathbf{V^{(i+1)}} - \mathbf{P^{(i)}}\\
+		\mathbf{\Delta \theta} & = & \mathbf{\theta^{(i+1)}} - \mathbf{Q^{(i)}}
+	\end{array}
+\end{equation}
+
+Onde o índice $(i)$ representa a iteração do processo.
+
+Os elementos que relacionam as tensões e ângulos com as potências são descritos abaixo:
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			H_{kk} & = & -B_{kk} \cdot V_{k}^2 - Q_{k}\\
+			H_{km} & = & +V_{k}\cdot V_{m} \cdot ( G_{km}\cdot sen\theta_{km} - B_{km}\cdot cos\theta_{km} ) \\
+			H_{mk} & = & -V_{k}\cdot V_{m} \cdot ( G_{km}\cdot sen\theta_{km} + B_{km}\cdot cos\theta_{km} ) 
+		\end{array}
+	\end{cases}
+\end{equation}
+
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			N_{kk} & = & -V_{k}^{-1} \cdot ( P_{k} + G_{kk}\cdot V_{k}^2 )\\
+			N_{km} & = & +V_{k} \cdot ( G_{km}\cdot cos\theta_{km} + B_{km}\cdot sen\theta_{km} ) \\
+			N_{mk} & = & -V_{m} \cdot ( G_{km}\cdot cos\theta_{km} - B_{km}\cdot sen\theta_{km} ) 
+		\end{array}
+	\end{cases}
+\end{equation}
+
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			M_{kk} & = & -G_{kk} \cdot V_{k}^2 + P_{k}\\
+			M_{km} & = & -V_{k}\cdot V_{m}\cdot ( G_{km}\cdot cos\theta_{km} + B_{km}\cdot sen\theta_{km} ) \\
+			M_{mk} & = & -V_{m}\cdot V_{k}\cdot ( G_{km}\cdot cos\theta_{km} - B_{km}\cdot sen\theta_{km} ) 
+		\end{array}
+	\end{cases}
+\end{equation}
+
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			L_{kk} & = & V_{k}^{-1} \cdot ( Q_k - B_{kk}\cdot V_{k}^2 )\\
+			L_{km} & = & +V_{k} \cdot ( G_{km}\cdot sen\theta_{km} - B_{km}\cdot cos\theta_{km} ) \\
+			L_{mk} & = & -V_{m} \cdot ( G_{km}\cdot sen\theta_{km} + B_{km}\cdot cos\theta_{km} ) 
+		\end{array}
+	\end{cases}
+\end{equation}
+
+Após realizar uma iteração as as tensões e os ângulos devem ser atualizados e é feito um teste de convergência. Caso o resultado ainda não convirja, o Jacobiano deve ser calculado novamente para passar para a próxima iteração. 
+
+O processo iterativo continua até que se obtenha um erro mínimo estipulado por:
+\begin{equation}
+	\begin{array}{rcl}
+		erro & > & max([\mathbf{\Delta P} \quad \mathbf{\Delta Q}])
+	\end{array}
+\end{equation}
+
+
+Feito isso, o subsistema 2 é resolvido. Este consiste basicamente em calcular as potências reativas para as barras $PV$ e as potências ativas e reativas para as barras $V\theta$.
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Método desacoplado 1}
+O método desacoplado 1 tem baseia-se no método de Newton, mas neste caso despreza-se as matrizes $\mathbf{M}$ e $\mathbf{N}$, sendo possível achar os ângulos e as tensões das barras de forma independente.
+\begin{equation}
+	\left[
+		\begin{array}{c}
+			\mathbf{\Delta P}^{(p)}\\
+			\mathbf{\Delta Q}^{(q)}		
+		\end{array}
+	\right]
+	=
+	\left[
+		\begin{array}{cc}
+			\mathbf{H}^{(p)} & \mathbf{0}\\
+			\mathbf{0} & \mathbf{L}^{(q)}
+		\end{array}
+	\right]
+	\cdot
+	\left[
+		\begin{array}{c}
+			\mathbf{\Delta \theta}^{(p)}\\
+			\mathbf{\Delta V}^{(q)}		
+		\end{array}
+	\right]
+\end{equation}
+
+No caso deste método, as matrizes $\mathbf{H}$ e $\mathbf{L}$ são as mesmas do método de Newton, logo elas podem ser consultadas na seção anterior.
+
+Como os métodos desacoplados permitem a solução das variáveis $\mathbf{V}$ e $\mathbf{\theta}$ de forma independente, o critério de teste da convergência é feito de maneira diferente. Os métodos desacoplados seguem o seguinte algorítimo para a solução do problema:
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{imagens/fluxograma}
+	\caption{Fluxograma para o algorítimo aplicado aos métodos desacoplados}
+\end{figure}
+ 
+Desta forma, os problemas ativo e reativo podem apresentar velocidades diferentes de convergência. Por isso, as iterações são contadas separadamente pelos contadores p e q.
+
+
+\subsection{Método desacoplado 2}
+O método desacoplado pode ser alterado dividindo o fluxo líquido de potência pelas tensões:
+\begin{equation}
+	\left[
+		\begin{array}{c}
+			\mathbf{\Delta P/V}^{(p)}\\
+			\mathbf{\Delta Q/V}^{(q)}	
+		\end{array}
+	\right]
+	=
+	\left[
+		\begin{array}{cc}
+			\mathbf{H'}^{(p)} & \mathbf{0}\\
+			\mathbf{0} & \mathbf{L'}^{(q)}
+		\end{array}
+	\right]
+	\cdot
+	\left[
+		\begin{array}{c}
+			\mathbf{\Delta \theta}^{(p)}\\
+			\mathbf{\Delta V}^{(q)}		
+		\end{array}
+	\right]
+\end{equation}
+
+Desta forma a matriz de desacoplamento é alterada:
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			H_{kk}' & = & -B_{kk} \cdot V_{k} - Q_{k}/V_{k}\\
+			H_{km}' & = & +V_{m} \cdot ( G_{km}\cdot sen\theta_{km} - B_{km}\cdot cos\theta_{km} ) \\
+		\end{array}
+	\end{cases}
+\end{equation}
+
+
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			L_{kk}' & = & Q_k / V_{k} - B_{kk} \cdot V_{k} \\
+			L_{km}' & = & +V_{m} \cdot ( G_{km}\cdot sen\theta_{km} - B_{km}\cdot cos\theta_{km} ) \\
+		\end{array}
+	\end{cases}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Método desacoplado rápido}
+Neste método, considera-se mais aproximações, as quais exigem algumas condições a serem satisfeitas:
+\begin{itemize}[noitemsep,nolistsep]
+	\item Sistema pouco carregado, o que faz com que $\theta_{km}$ seja pequeno e que $cos\theta_{km}$ seja aproximadamente unitário;
+	\item Tensões próximas a 1 pu;
+	\item Relação $B_{km}/G_{km}$ alta.
+\end{itemize}
+
+O sistema a ser resolvido se torna:
+\begin{equation}
+	\left[
+		\begin{array}{c}
+			\mathbf{\Delta Q/V}^{(q)}\\
+			\mathbf{\Delta P/V}^{(p)}	
+		\end{array}
+	\right]
+	=
+	\left[
+		\begin{array}{cc}
+			\mathbf{B'} & \mathbf{0}\\
+			\mathbf{0} & \mathbf{B''}
+		\end{array}
+	\right]
+	\cdot
+	\left[
+		\begin{array}{c}
+			\mathbf{\Delta \theta}^{(q)}\\
+			\mathbf{\Delta V}^{(p)}		
+		\end{array}
+	\right]
+\end{equation}
+
+Respeitadas as exigências e desprezando a resistência para o cálculo dos elementos $\mathbf{B'}$, os parâmetros do sistemas assumem as características mostradas abaixo. Esta aproximação, no método desacoplado rápido é conhecida como método XB, e possui a melhor velocidade de convergência na grande maioria dos casos. 
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			B'_{kk} & = & \displaystyle\sum\limits_{k\in\Omega_k}^{} \dfrac{1}{x_{km}}\\
+			B'_{km} & = & -\dfrac{1}{x_{km}} 
+		\end{array}
+	\end{cases}
+\end{equation}
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			B''_{kk} & = & -B_{kk}\\
+			B''_{km} & = & -B_{km} \\
+		\end{array}
+	\end{cases}
+\end{equation}
+
+Nota-se que os valores de $\mathbf{B'}$ e $\mathbf{B''}$ não mudam ao longo do processo iterativo, o que torna o método menos complexos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Método DC}
+O método DC é baseado no acoplamento $P\theta$, logo ele só leva em conta o fluxo ativo de potência. Neste método, são feitas mais aproximações do que no método desacoplado rápido:
+\begin{itemize}[noitemsep,nolistsep]
+	\item Ângulos das tensões muito pequenos, ou seja $sen\theta_{km}\approx \theta_{km}$;
+	\item Tensões unitárias em todas as barras 1 pu;
+	\item Resistência série da linha nula, $r_{km} = 0$.
+\end{itemize}
+
+Dadas essas aproximações, o problema se resume a:
+\begin{equation}
+	\mathbf{\Delta P} = \mathbf{B'} \cdot \mathbf{\Delta\theta}
+\end{equation}
+
+Onde:
+\begin{equation}
+	\begin{cases}
+		\begin{array}{rcl}
+			B'_{kk} & = & \displaystyle\sum\limits_{k\in\Omega_k}^{} \dfrac{1}{x_{km}}\\
+			B'_{km} & = & -\dfrac{1}{x_{km}} 
+		\end{array}
+	\end{cases}
+\end{equation}

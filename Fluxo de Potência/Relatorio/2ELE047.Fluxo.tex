@@ -1,0 +1,56 @@
+\documentclass[a4paper,11pt]{article}
+%BIBLIOTECAS==================================================================================%
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx} %para inserir figuras
+\usepackage{subfigure} %para inserir subfiguras
+\usepackage{url} %para links
+\usepackage[normalem]{ulem}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{cite}
+\usepackage{indentfirst} %primeiro par�grafo
+\usepackage[font=small,format=plain,labelfont=bf,up,up]{caption} %customiza legendas
+\usepackage[a4paper,left=3cm,bottom=2cm,right=2cm,top=3cm]{geometry} %para definir as margens
+\usepackage{listings} %para formatar c�digo-fonte
+\lstset{numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=5pt,basicstyle=\scriptsize,frame=single} %para c�digos
+\usepackage{float} %posicao das legendas
+\usepackage{multicol} %subcolunas
+\usepackage{multirow}
+\usepackage{enumitem} %itens
+%=============================================================================================%
+\setlength{\parindent}{25pt}
+\setlength{\parskip}{0ex}
+\onehalfspacing
+%=============================================================================================%
+%\titleformat{\part}[frame]{\normalfont}{\filright\footnotesize\enspace\thepart\enspace}{1em}{\Large\bfseries\filcenter}
+%\titleformat{\section}[block]{\bfseries}{\thesection.}{1em}{\MakeUppercase}
+%\titleformat{\subsection}[block]{\normalfont}{\thesubsection.}{1em}{\MakeUppercase}
+%\titleformat{\subsubsection}[block]{\normalfont}{\thesubsubsection.}{1em}{}
+\renewcommand{\lstlistingname}{Script}
+\DeclareCaptionLabelSeparator{minus}{ - }
+\captionsetup[FLOAT_TYPE]{labelformat=simple, labelsep=colon}
+\captionsetup[figure]{labelsep=minus}
+\captionsetup[table]{labelsep=minus}
+\captionsetup[lstlisting]{labelsep=minus}
+\floatstyle{plaintop}\restylefloat{table} %legenda das tabelas no topo
+\addtolength{\belowcaptionskip}{-4pt} %espaco entre legendas
+\addtolength{\abovecaptionskip}{-2pt}
+
+%=============================================================================================%
+\begin{document}
+	\include{2ELE047.Capa}
+	\include{2ELE047.Sumario}
+	%\include{2ELE047.Resumo}
+	\include{2ELE047.Objetivos}
+	\include{2ELE047.Revisao}
+	\include{2ELE047.Metodologia}
+	\include{2ELE047.Resultados}
+	\include{2ELE047.Conc.ref}
+	%\include{2ELE047.Anexos}
+\end{document}
+%=============================================================================================%
