@@ -13,8 +13,8 @@
 \contentsline {section}{\numberline {3}METODOLOGIA EXPERIMENTAL}{10}
 \contentsline {section}{\numberline {4}RESULTADOS}{11}
 \contentsline {subsection}{\numberline {4.1}M\'etodo de Newton}{11}
-\contentsline {subsection}{\numberline {4.2}M\'etodos Desacoplado 1 e 2}{12}
-\contentsline {subsection}{\numberline {4.3}M\'etodo desacoplado r\'apido}{13}
-\contentsline {subsection}{\numberline {4.4}M\'etodo DC}{14}
-\contentsline {section}{\numberline {5}DISCUSS\~OES E CONCLUS\~OES}{15}
-\contentsline {section}{REFER\^ENCIAS}{16}
+\contentsline {subsection}{\numberline {4.2}M\'etodos Desacoplado 1 e 2}{13}
+\contentsline {subsection}{\numberline {4.3}M\'etodo desacoplado r\'apido}{14}
+\contentsline {subsection}{\numberline {4.4}M\'etodo DC}{15}
+\contentsline {section}{\numberline {5}DISCUSS\~OES E CONCLUS\~OES}{16}
+\contentsline {section}{REFER\^ENCIAS}{17}
